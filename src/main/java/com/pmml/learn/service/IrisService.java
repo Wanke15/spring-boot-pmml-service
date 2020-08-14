@@ -45,15 +45,15 @@ public class IrisService {
         return evaluator;
     }
 
-    private int predict(Evaluator evaluator,Double a, Double b, Double c, Double d) {
-        Map<String, Double> data = new HashMap<String, Double>();
-        data.put("sepalLength", a);
-        data.put("sepalWidth", b);
-        data.put("petalLength", c);
-        data.put("petalWidth", d);
+    private int predict(Evaluator evaluator,Double sepalLength, Double sepalWidth, Double petalLength, Double petalWidth) {
+        Map<String, Double> data = new HashMap<>();
+        data.put("sepalLength", sepalLength);
+        data.put("sepalWidth", sepalWidth);
+        data.put("petalLength", petalLength);
+        data.put("petalWidth", petalWidth);
         List<InputField> inputFields = evaluator.getInputFields();
-        //过模型的原始特征，从画像中获取数据，作为模型输入
-        Map<FieldName, FieldValue> arguments = new LinkedHashMap<FieldName, FieldValue>();
+
+        Map<FieldName, FieldValue> arguments = new LinkedHashMap<>();
         for (InputField inputField : inputFields) {
             FieldName inputFieldName = inputField.getName();
             Object rawValue = data.get(inputFieldName.getValue());
@@ -74,7 +74,6 @@ public class IrisService {
             Computable computable = (Computable) targetFieldValue;
             primitiveValue = (Integer)computable.getResult();
         }
-        System.out.println(a + " " + b + " " + c + " " + d + " predisction: " + primitiveValue);
         return primitiveValue;
     }
 
