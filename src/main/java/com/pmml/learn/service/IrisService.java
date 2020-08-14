@@ -4,6 +4,7 @@ import com.pmml.learn.model.IrisPrediction;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
 import org.jpmml.evaluator.*;
+import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import com.typesafe.config.Config;
@@ -16,7 +17,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
+@Service
 public class IrisService {
+    private final Evaluator evaluator = loadPmml();
+
     private Config serviceConf = ConfigFactory.load();
 
     private Evaluator loadPmml(){
@@ -49,7 +53,7 @@ public class IrisService {
         return evaluator;
     }
 
-    private IrisPrediction predict(Evaluator evaluator, Double sepalLength, Double sepalWidth, Double petalLength, Double petalWidth) {
+    public IrisPrediction predict(Double sepalLength, Double sepalWidth, Double petalLength, Double petalWidth) {
         Map<String, Double> data = new HashMap<>();
         data.put("sepalLength", sepalLength);
         data.put("sepalWidth", sepalWidth);
@@ -91,9 +95,8 @@ public class IrisService {
     public static void main(String[] args)
     {
         IrisService demo = new IrisService();
-        Evaluator model = demo.loadPmml();
-        IrisPrediction irisPrediction2 = demo.predict(model,7.1,3.1,5.9,2.1); // 2
-        IrisPrediction irisPrediction1 = demo.predict(model,5.8,2.7,4.0,1.2); // 1
+        IrisPrediction irisPrediction2 = demo.predict(7.1,3.1,5.9,2.1); // 2
+        IrisPrediction irisPrediction1 = demo.predict(5.8,2.7,4.0,1.2); // 1
         System.err.println(irisPrediction2);
         System.err.println(irisPrediction1);
     }

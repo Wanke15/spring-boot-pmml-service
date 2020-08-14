@@ -1,9 +1,9 @@
 package com.pmml.learn.model;
 
 public class IrisPrediction {
-    private Double probability;
-    private Integer categoryId;
-    private String category;
+    public Double probability;
+    public Integer categoryId;
+    public String category;
 
     public IrisPrediction() {
     }
