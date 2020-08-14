@@ -76,7 +76,7 @@ public class IrisService {
         FieldName targetFieldName = targetField.getName();
 
         Object targetFieldValue = results.get(targetFieldName);
-        System.out.println("target: " + targetFieldName.getValue() + " value: " + targetFieldValue);
+//        System.out.println("target: " + targetFieldName.getValue() + " value: " + targetFieldValue);
         int primitiveValue = -1;
         if (targetFieldValue instanceof Computable) {
             Computable computable = (Computable) targetFieldValue;
